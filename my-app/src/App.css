@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* Setting styles for the entire app */
+.app-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+/* Styles for the file uploader */
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
