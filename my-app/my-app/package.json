@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "firebase": "^9.22.1",
-    "uuid": "^9.0.0"
-=======
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -44,6 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
->>>>>>> 51b2a2a40e5bddba20cb935f005c7c1ecc7643c8
   }
 }
