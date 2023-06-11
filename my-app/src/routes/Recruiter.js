@@ -4,6 +4,7 @@ import { ref, listAll, getBlob, getDownloadURL } from "firebase/storage"; // Imp
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
+import "./App.css";
 
 // Initialize PDF.js with the worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -65,6 +66,7 @@ function Recruiter() {
 
   return (
     <div className="container">
+      <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
       <h1 className="text-center"> Recruiter </h1>
       <div className="row justify-content-center mb-3">
         <div className="col-6">
