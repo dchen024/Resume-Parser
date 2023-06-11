@@ -37,8 +37,8 @@ function Applicant() {
 
   // Function to clean parsed contents string so there isn't special
   const cleanString = (str) => {
-    // Remove special characters
-    const cleanedStr = str.replace(/[^\w\s]/gi, "");
+    // Remove special characters except for +, #, @, ., and -
+    const cleanedStr = str.replace(/[^\w\s+#@.-]/gi, "");
   
     // Remove duplicate spaces
     return cleanedStr.replace(/\s+/g, " ");

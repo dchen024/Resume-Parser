@@ -23,15 +23,6 @@ function Recruiter() {
   }, [searchQuery]);
 
 
-  // Function to clean parsed contents string so there isn't special
-  const cleanString = (str) => {
-    // Remove special characters
-    const cleanedStr = str.replace(/[^\w\s]/gi, "");
-  
-    // Remove duplicate spaces
-    return cleanedStr.replace(/\s+/g, " ");
-  };
-
 
   const openFileURL = (url) => {
     // Open the file URL in a new tab
