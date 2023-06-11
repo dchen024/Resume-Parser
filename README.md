@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## npm install
-Installs all the necessary dependencies for the code to run.
+Installs all the necessary dependencies for the code to compile properly.
 
 ## Available Scripts
 
