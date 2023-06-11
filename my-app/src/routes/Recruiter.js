@@ -41,7 +41,7 @@ function Recruiter() {
   const searchFiles = () => {
     // Search for files in Firebase storage
     setIsLoading(true);
-    const filesRef = ref(storage, "files");
+    const filesRef = ref(storage);
     listAll(filesRef)
       .then((res) => {
         const searchPromises = res.items.map((item) =>
