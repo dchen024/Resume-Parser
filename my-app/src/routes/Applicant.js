@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { storage } from "../firebase"; // Import the Firebase storage module
 import { ref, uploadBytes } from "firebase/storage"; // Import the Firebase storage functions
-import { v4 as uuidv4 } from "uuid"; // Import the UUID library
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
@@ -16,11 +15,20 @@ function Applicant() {
     // Upload the selected file to Firebase storage
     if (fileUpload == null) return;
 
-    const fileRef = ref(storage, `files/${fileUpload.name + uuidv4()}`);
+    const file = fileUpload.name.split(".");
+    const ext = file.pop();
+    
+    const path = `${file.join(".") + crypto.randomUUID()}.${ext}`;
+
+    const fileRef = ref(
+      storage,
+      path
+    );
+
     uploadBytes(fileRef, fileUpload)
       .then(() => {
+        parsePDF(fileUpload, path); // Parse the uploaded PDF file
         alert("File Uploaded");
-        parsePDF(fileUpload); // Parse the uploaded PDF file
       })
       .catch((error) => {
         console.log("Upload Error:", error);
@@ -36,7 +44,7 @@ function Applicant() {
     return cleanedStr.replace(/\s+/g, " ");
   };
 
-const parsePDF = (file) => {
+const parsePDF = (file, path) => {
   // Parse the uploaded PDF file using PDF.js
   const fileReader = new FileReader();
   fileReader.onload = function () {
@@ -61,7 +69,7 @@ const parsePDF = (file) => {
         .then((pageTexts) => {
           const parsedText = pageTexts.join("\n");
           const cleanedText = cleanString(parsedText); // Clean up the parsed text
-          storeParsedText(cleanedText, file); // Store the cleaned text as a text file
+          storeParsedText(cleanedText, path); // Store the cleaned text as a text file
         })
         .catch((error) => {
           console.log("PDF Parsing Error:", error);
@@ -71,9 +79,9 @@ const parsePDF = (file) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-const storeParsedText = (parsedText, file) => {
+const storeParsedText = (parsedText, path) => {
   // Store the parsed text as a text file in Firebase storage
-  const textFileRef = ref(storage, `files/${file.name}.txt`);
+  const textFileRef = ref(storage, `${path.replace(/\.pdf$/, '.txt')}`);
   const textFileBlob = new Blob([parsedText], { type: "text/plain" });
 
   uploadBytes(textFileRef, textFileBlob)
