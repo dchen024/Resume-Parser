@@ -39,39 +39,49 @@ function App() {
       });
   };
 
-  const parsePDF = (file) => {
-    // Parse the uploaded PDF file using PDF.js
-    const fileReader = new FileReader();
-    fileReader.onload = function () {
-      const typedArray = new Uint8Array(this.result);
-      const loadingTask = pdfjsLib.getDocument(typedArray);
-      loadingTask.promise.then(function (pdf) {
-        const numPages = pdf.numPages;
-        const getPageText = (page) =>
-          page.getTextContent().then(function (textContent) {
-            const pageText = textContent.items
-              .map((item) => item.str)
-              .join(" ");
-            return pageText;
-          });
-
-        const getPagePromises = Array.from(
-          { length: numPages },
-          (_, i) => i + 1
-        ).map((pageNum) => pdf.getPage(pageNum).then(getPageText));
-
-        Promise.all(getPagePromises)
-          .then((pageTexts) => {
-            const parsedText = pageTexts.join("\n");
-            storeParsedText(parsedText, file); // Store the parsed text as a text file
-          })
-          .catch((error) => {
-            console.log("PDF Parsing Error:", error);
-          });
-      });
-    };
-    fileReader.readAsArrayBuffer(file);
+  // Function to clean parsed contents string so there isn't special
+  const cleanString = (str) => {
+    // Remove special characters
+    const cleanedStr = str.replace(/[^\w\s]/gi, "");
+  
+    // Remove duplicate spaces
+    return cleanedStr.replace(/\s+/g, " ");
   };
+
+const parsePDF = (file) => {
+  // Parse the uploaded PDF file using PDF.js
+  const fileReader = new FileReader();
+  fileReader.onload = function () {
+    const typedArray = new Uint8Array(this.result);
+    const loadingTask = pdfjsLib.getDocument(typedArray);
+    loadingTask.promise.then(function (pdf) {
+      const numPages = pdf.numPages;
+      const getPageText = (page) =>
+        page.getTextContent().then(function (textContent) {
+          const pageText = textContent.items
+            .map((item) => item.str)
+            .join(" ");
+          return pageText;
+        });
+
+      const getPagePromises = Array.from(
+        { length: numPages },
+        (_, i) => i + 1
+      ).map((pageNum) => pdf.getPage(pageNum).then(getPageText));
+
+      Promise.all(getPagePromises)
+        .then((pageTexts) => {
+          const parsedText = pageTexts.join("\n");
+          const cleanedText = cleanString(parsedText); // Clean up the parsed text
+          storeParsedText(cleanedText, file); // Store the cleaned text as a text file
+        })
+        .catch((error) => {
+          console.log("PDF Parsing Error:", error);
+        });
+    });
+  };
+  fileReader.readAsArrayBuffer(file);
+};
 
   const storeParsedText = (parsedText, file) => {
     // Store the parsed text as a text file in Firebase storage
