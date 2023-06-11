@@ -20,10 +20,7 @@ function Applicant() {
     
     const path = `${file.join(".") + crypto.randomUUID()}.${ext}`;
 
-    const fileRef = ref(
-      storage,
-      path
-    );
+    const fileRef = ref(storage, `pdf/${path}`);
 
     uploadBytes(fileRef, fileUpload)
       .then(() => {
@@ -81,7 +78,7 @@ const parsePDF = (file, path) => {
 
 const storeParsedText = (parsedText, path) => {
   // Store the parsed text as a text file in Firebase storage
-  const textFileRef = ref(storage, `${path.replace(/\.pdf$/, '.txt')}`);
+  const textFileRef = ref(storage, `txt/${path.replace(/\.pdf$/, ".txt")}`);
   const textFileBlob = new Blob([parsedText], { type: "text/plain" });
 
   uploadBytes(textFileRef, textFileBlob)

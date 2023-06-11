@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { storage } from "../firebase"; // Import the Firebase storage module
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"; // Import the Firebase storage functions
+import { ref, listAll, getBlob, getDownloadURL } from "firebase/storage"; // Import the Firebase storage functions
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
@@ -13,6 +13,47 @@ function Recruiter() {
   const [searchResults, setSearchResults] = useState([]); // State variable to store the search results
   const [isLoading, setIsLoading] = useState(false); // State variable to indicate if a search is in progress
 
+  const searchFiles = useCallback(async () => {
+    // Search for files in Firebase storage
+    setIsLoading(true);
+
+    const textRef = ref(storage, "txt");
+    const pdfRef = ref(storage, "pdf");
+
+    const { items } = await listAll(textRef).catch((error) => {
+      console.error("Listing Files Error:", error);
+
+      setIsLoading(false);
+    });
+
+    const results = await Promise.all(
+      items.map(async (item) => {
+        const blob = await getBlob(item);
+
+        return { content: await blob.text(), name: item.name };
+      })
+    ).catch((error) => {
+      console.error("Search Error:", error);
+      setIsLoading(false);
+    });
+
+    const filteredResults = await Promise.all(
+      results
+        .filter(({ content }) =>
+          content.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map(async (result) => {
+          const name = result.name.replace(/\.txt$/, ".pdf");
+          const url = await getDownloadURL(ref(pdfRef, name));
+
+          return { name, url };
+        })
+    );
+
+    setSearchResults(filteredResults);
+    setIsLoading(false);
+  }, [searchQuery]);
+
   useEffect(() => {
     // Trigger a search when the search query changes
     if (searchQuery.trim() === "") {
@@ -20,58 +61,7 @@ function Recruiter() {
     } else {
       searchFiles();
     }
-  }, [searchQuery]);
-
-
-
-  const openFileURL = (url) => {
-    // Open the file URL in a new tab
-    window.open(url, "_blank");
-  };
-
-  const searchFiles = () => {
-    // Search for files in Firebase storage
-    setIsLoading(true);
-    const filesRef = ref(storage);
-    listAll(filesRef)
-      .then((res) => {
-        const searchPromises = res.items.map((item) =>
-          getDownloadURL(item).then((url) =>
-            fetchProxyFileContent(url, item.name)
-          )
-        );
-        Promise.all(searchPromises)
-          .then((results) => {
-            const filteredResults = results.filter((result) =>
-              result.content.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-            setSearchResults(filteredResults);
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            console.log("Search Error:", error);
-            setIsLoading(false);
-          });
-      })
-      .catch((error) => {
-        console.log("Listing Files Error:", error);
-        setIsLoading(false);
-      });
-  };
-
-  const fetchProxyFileContent = (url, fileName) => {
-    // Fetch the content of a file using a proxy server
-    const proxyUrl = `http://localhost:3001/fetch-file?url=${encodeURIComponent(
-      url
-    )}`;
-    return fetch(proxyUrl)
-      .then((response) => response.text())
-      .then((fileContent) => ({ name: fileName, content: fileContent, url })) // Include the 'url' property
-      .catch((error) => {
-        console.log("Fetch Error:", error);
-        return { name: fileName, content: null, url }; // Include the 'url' property
-      });
-  };
+  }, [searchQuery, searchFiles]);
 
   return (
     <div className="container">
