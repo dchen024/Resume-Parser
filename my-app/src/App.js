@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { storage } from "./firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
-import "bootstrap/dist/css/bootstrap.min.css";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
+import { storage } from "./firebase"; // Import the Firebase storage module
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"; // Import the Firebase storage functions
+import { v4 as uuidv4 } from "uuid"; // Import the UUID library
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
+import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
 
 // Initialize PDF.js with the worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
 function App() {
-  const [fileUpload, setFileUpload] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [fileUpload, setFileUpload] = useState(null); // State variable to store the file being uploaded
+  const [searchQuery, setSearchQuery] = useState(""); // State variable to store the search query
+  const [searchResults, setSearchResults] = useState([]); // State variable to store the search results
+  const [isLoading, setIsLoading] = useState(false); // State variable to indicate if a search is in progress
 
   useEffect(() => {
+    // Trigger a search when the search query changes
     if (searchQuery.trim() === "") {
       setSearchResults([]);
     } else {
@@ -23,13 +25,14 @@ function App() {
   }, [searchQuery]);
 
   const uploadFile = () => {
+    // Upload the selected file to Firebase storage
     if (fileUpload == null) return;
 
     const fileRef = ref(storage, `files/${fileUpload.name + uuidv4()}`);
     uploadBytes(fileRef, fileUpload)
       .then(() => {
         alert("File Uploaded");
-        parsePDF(fileUpload);
+        parsePDF(fileUpload); // Parse the uploaded PDF file
       })
       .catch((error) => {
         console.log("Upload Error:", error);
@@ -37,6 +40,7 @@ function App() {
   };
 
   const parsePDF = (file) => {
+    // Parse the uploaded PDF file using PDF.js
     const fileReader = new FileReader();
     fileReader.onload = function () {
       const typedArray = new Uint8Array(this.result);
@@ -59,7 +63,7 @@ function App() {
         Promise.all(getPagePromises)
           .then((pageTexts) => {
             const parsedText = pageTexts.join("\n");
-            storeParsedText(parsedText, file);
+            storeParsedText(parsedText, file); // Store the parsed text as a text file
           })
           .catch((error) => {
             console.log("PDF Parsing Error:", error);
@@ -70,6 +74,7 @@ function App() {
   };
 
   const storeParsedText = (parsedText, file) => {
+    // Store the parsed text as a text file in Firebase storage
     const textFileRef = ref(storage, `files/${file.name}.txt`);
     const textFileBlob = new Blob([parsedText], { type: "text/plain" });
 
@@ -84,10 +89,12 @@ function App() {
   };
 
   const openFileURL = (url) => {
+    // Open the file URL in a new tab
     window.open(url, "_blank");
   };
 
   const searchFiles = () => {
+    // Search for files in Firebase storage
     setIsLoading(true);
     const filesRef = ref(storage, "files");
     listAll(filesRef)
@@ -117,6 +124,7 @@ function App() {
   };
 
   const fetchProxyFileContent = (url, fileName) => {
+    // Fetch the content of a file using a proxy server
     const proxyUrl = `http://localhost:3001/fetch-file?url=${encodeURIComponent(
       url
     )}`;
