@@ -9,6 +9,10 @@ Installs all the necessary dependencies for the code to compile properly.
 
 In the project directory, you can run:
 
+### Create a .env file
+Hides your API key to prevent attackers from accessing firebase storage. 
+Go to firebase.google.com, create a new project, and copy the code to configure your firebase.js file into a .env file
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -16,10 +20,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### Create a .env file
-Hides your API key to prevent attackers from accessing firebase storage. 
-Go to firebase.google.com, create a new project, and copy the code to configure your firebase.js file into a .env file
 
 ### Application Information
 Our Resume Parser app has an interface for two types of users, an applicant and a recruiter. 
