@@ -15,7 +15,6 @@ function App() {
         <Link className="btn btn-primary btn-lg" to="/applicant" role="button">
           Applicant
         </Link>
-        <space></space> <space></space> <space></space> <space></space>
         <Link className="btn btn-danger btn-lg" to="/recruiter" role="button">
           Recruiter
         </Link>

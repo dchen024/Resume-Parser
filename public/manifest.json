@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Resume Parser",
+  "name": "Resume Parser",
   "icons": [
     {
       "src": "favicon.ico",
