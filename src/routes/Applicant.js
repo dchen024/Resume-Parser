@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { storage } from "../firebase"; // Import the Firebase storage module
 import { ref, uploadBytes } from "firebase/storage"; // Import the Firebase storage functions
 import { Link } from "react-router-dom"; // Import the React Router Link component
-import { AiFillHome } from 'react-icons/ai'; // Import the home icon from React Icons
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import { AiFillHome, AiFillBackward } from "react-icons/ai"; // Import the home icon from React Icons
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
-import "./App.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Initialize PDF.js with the worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -21,7 +19,7 @@ function Applicant() {
     if (fileUpload == null) return;
 
     const file = fileUpload.name.split(".");
-    
+
     if (file.pop() !== "pdf") {
       toast.error("Invalid file type. Please upload a PDF file."); // Show an error message if the file type is invalid
       return;
@@ -31,14 +29,12 @@ function Applicant() {
 
     const fileRef = ref(storage, `pdf/${path}.pdf`);
 
-    toast.promise(
-      uploadBytes(fileRef, fileUpload),
-      {
+    toast
+      .promise(uploadBytes(fileRef, fileUpload), {
         pending: "File Uploading...",
         success: "File Uploaded",
-        error: "Upload Error"
-      }
-    )
+        error: "Upload Error",
+      })
       .then(() => {
         parsePDF(fileUpload, path); // Parse the uploaded PDF file
       })
@@ -52,7 +48,7 @@ function Applicant() {
   const cleanString = (str) => {
     // Remove special characters except for +, #, @, ., and -
     const cleanedStr = str.replace(/[^\w\s+#@.-]/gi, "");
-  
+
     // Remove duplicate spaces
     return cleanedStr.replace(/\s+/g, " ");
   };
@@ -107,41 +103,30 @@ function Applicant() {
   };
 
   return (
-    <div className="applicant">
-      <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
-      <div className="row justify-content-between mb-3">
-        <div className="col-2">
-          <Link to="/">
-            <AiFillHome size={32} />
-          </Link>
+    <>
+      <Link to="/">
+        <AiFillHome className="m-5" size={32} />
+      </Link>
+
+      <div className="container">
+        <h1>Applicant</h1>
+        <p>Please Submit a PDF of your Resume</p>
+
+        <div className="input-group mt-5">
+          <input
+            type="file"
+            className="form-control"
+            onChange={(event) => setFileUpload(event.target.files[0])}
+          />
+
+          <button className="btn btn-primary" onClick={uploadFile}>
+            Upload File
+          </button>
         </div>
-        <div className="col-6">
-          <h1 className="text-center"> Applicant </h1>
-          <p className = "text-center"> Please Submit a PDF of your Resume </p>
-        </div>
-        <div className="col-2"></div>
+
+        <ToastContainer />
       </div>
-      <div className="row justify-content-center mb-3">
-        <div className="col-6">
-          <div className="input-group">
-            <input
-              type="file"
-              className="form-control"
-              onChange={(event) => {
-                setFileUpload(event.target.files[0]);
-              }}
-            />
-            <button
-              className="btn btn-primary"
-              onClick={uploadFile}
-            >
-              Upload File
-            </button>
-          </div>
-        </div>
-      </div>
-      <ToastContainer />
-    </div>
+    </>
   );
 }
 
