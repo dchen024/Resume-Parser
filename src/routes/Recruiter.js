@@ -67,7 +67,7 @@ function Recruiter() {
   }, [searchQuery, searchFiles]);
 
   return (
-    <div className="container">
+    <div className="recruiter">
       <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
       <div className="row justify-content-between mb-3">
         <div className="col-2">
@@ -76,7 +76,9 @@ function Recruiter() {
           </Link>
         </div>
         <div className="col-6">
+          <br></br>
           <h1 className="text-center"> Recruiter </h1>
+          <p className = "text-center"> Search for Resumes with Keyword </p>
         </div>
         <div className="col-2"></div>
       </div>
@@ -94,7 +96,7 @@ function Recruiter() {
             />
             {searchQuery.trim() === "" && (
               <button
-                className="btn btn-secondary"
+                className="btn btn-success"
                 onClick={searchFiles}
                 disabled={isLoading}
               >

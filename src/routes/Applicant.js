@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
 import "./App.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Initialize PDF.js with the worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -20,8 +22,8 @@ function Applicant() {
 
     const file = fileUpload.name.split(".");
     
-    if (!file.pop()) {
-      console.error("Invalid file type");
+    if (file.pop() !== "pdf") {
+      toast.error("Invalid file type. Please upload a PDF file."); // Show an error message if the file type is invalid
       return;
     }
 
@@ -29,13 +31,20 @@ function Applicant() {
 
     const fileRef = ref(storage, `pdf/${path}.pdf`);
 
-    uploadBytes(fileRef, fileUpload)
+    toast.promise(
+      uploadBytes(fileRef, fileUpload),
+      {
+        pending: "File Uploading...",
+        success: "File Uploaded",
+        error: "Upload Error"
+      }
+    )
       .then(() => {
         parsePDF(fileUpload, path); // Parse the uploaded PDF file
-        alert("File Uploaded");
       })
       .catch((error) => {
-        console.log("Upload Error:", error);
+        toast.error("Upload Error"); // Show an error message if there is an error
+        console.log("Upload Error:", error); // Log an error if the file upload fails
       });
   };
 
@@ -98,7 +107,7 @@ function Applicant() {
   };
 
   return (
-    <div className="container">
+    <div className="applicant">
       <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
       <div className="row justify-content-between mb-3">
         <div className="col-2">
@@ -108,6 +117,7 @@ function Applicant() {
         </div>
         <div className="col-6">
           <h1 className="text-center"> Applicant </h1>
+          <p className = "text-center"> Please Submit a PDF of your Resume </p>
         </div>
         <div className="col-2"></div>
       </div>
@@ -130,6 +140,7 @@ function Applicant() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #0557fb;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,4 +40,44 @@
 h1 {
   font-family: 'Varela Round', sans-serif;
   font-weight: 400;
+  display:flow-root;
+  color:darkviolet;
+  text-align: center;
+}
+.title{
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 400;
+  font-size: 60px;
+  display:flow-root;
+  text-align: center;
+}
+p{
+  text-align: center;
+  color: grey;
+}
+.container{
+  position: absolute;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -70%);
+  display:grid;
+  align-items: center;
+  justify-content: center;
+}
+.recruiter{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-47%, -70%);
+  height: 300px;
+  width: 1200px;
+}
+
+.applicant{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-47%, -70%);
+  height: 300px;
+  width: 1200px;
 }
