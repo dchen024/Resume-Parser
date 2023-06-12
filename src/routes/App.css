@@ -85,3 +85,11 @@ p{
 .btn {
   margin: 0 15px;
 }
+
+.custom-title {
+  font-size: 80px;
+}
+
+.button-div {
+  margin-top: 20px;
+}
