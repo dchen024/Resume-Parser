@@ -4,6 +4,8 @@ import { ref, listAll, getBlob, getDownloadURL } from "firebase/storage"; // Imp
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
+import { Link } from "react-router-dom"; // Import the React Router Link component
+import { AiFillHome } from 'react-icons/ai'; // Import the home icon from React Icons
 import "./App.css";
 
 // Initialize PDF.js with the worker
@@ -67,7 +69,17 @@ function Recruiter() {
   return (
     <div className="container">
       <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
-      <h1 className="text-center"> Recruiter </h1>
+      <div className="row justify-content-between mb-3">
+        <div className="col-2">
+          <Link to="/">
+            <AiFillHome size={32} />
+          </Link>
+        </div>
+        <div className="col-6">
+          <h1 className="text-center"> Recruiter </h1>
+        </div>
+        <div className="col-2"></div>
+      </div>
       <div className="row justify-content-center mb-3">
         <div className="col-6">
           <div className="input-group">
