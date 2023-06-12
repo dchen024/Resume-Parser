@@ -64,23 +64,6 @@ p{
   align-items: center;
   justify-content: center;
 }
-.recruiter{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-47%, -70%);
-  height: 300px;
-  width: 1200px;
-}
-
-.applicant{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-47%, -70%);
-  height: 300px;
-  width: 1200px;
-}
 
 .btn {
   margin: 0 15px;
