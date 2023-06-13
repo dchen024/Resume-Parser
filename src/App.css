@@ -1,0 +1,16 @@
+body, h1, p, input {
+  font-family: 'Varela Round', sans-serif;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 62.5vh;
+  width: 600px !important;
+}
+
+.view-button {
+  margin-right: 10px;
+}

@@ -4,6 +4,9 @@ import App from './routes/App';
 import Applicant from './routes/Applicant';
 import Recruiter from './routes/Recruiter';
 import reportWebVitals from './reportWebVitals';
+import "./App.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -27,6 +30,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+
     <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -6,7 +6,7 @@ import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.j
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
 import { Link } from "react-router-dom"; // Import the React Router Link component
 import { AiFillHome } from 'react-icons/ai'; // Import the home icon from React Icons
-import "./App.css";
+import "../App.css";
 import { FaTrash } from "react-icons/fa";
 
 // Initialize PDF.js with the worker
@@ -90,10 +90,10 @@ function Recruiter() {
       <div className="row justify-content-between mb-3">
         <div className="col-2">
           <Link to="/">
-            <AiFillHome size={32} />
+            <AiFillHome className="m-5" size={32} />
           </Link>
         </div>
-        <div className="col-6">
+        <div className="container">
           <br></br>
           <h1 className="text-center"> Recruiter </h1>
           <p className = "text-center"> Search for Resumes with Keyword </p>
@@ -129,7 +129,7 @@ function Recruiter() {
           {isLoading ? (
             <p className="text-center">Loading...</p>
           ) : (
-            <ul className="list-group">
+            <ul className="list-group w-100">
               {searchResults.length === 0 ? (
                 <li className="list-group-item text-center">
                   No results found
@@ -146,7 +146,7 @@ function Recruiter() {
                         href={result.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-info mr-2"
+                        className="btn btn-info mr-2 view-button"
                       >
                         View
                       </a>
