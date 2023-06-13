@@ -93,8 +93,7 @@ function Recruiter() {
             <AiFillHome className="m-5" size={32} />
           </Link>
         </div>
-        <div className="container">
-          <br></br>
+        <div>
           <h1 className="text-center"> Recruiter </h1>
           <p className = "text-center"> Search for Resumes with Keyword </p>
         </div>

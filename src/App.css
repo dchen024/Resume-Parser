@@ -11,6 +11,18 @@ body, h1, p, input {
   width: 600px !important;
 }
 
+.applicant{
+  /* make the items centered*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* make the items centered*/
+  margin: 0 auto;
+  width: 600px !important;
+}
+
+
 .view-button {
   margin-right: 10px;
 }

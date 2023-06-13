@@ -108,11 +108,11 @@ function Applicant() {
         <AiFillHome className="m-5" size={32} />
       </Link>
 
-      <div className="container">
+      <div className="applicant">
         <h1>Applicant</h1>
         <p>Please Submit a PDF of your Resume</p>
 
-        <div className="input-group mt-5">
+        <div className="input-group mt-5 ">
           <input
             type="file"
             className="form-control"
