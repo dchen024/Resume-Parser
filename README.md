@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+# Resume Parser
+Projected Asigned by **HeadStarter** and **Mofizur Rahman**, Developer Relations Engineer at Google.  
+Created by Jawad Chowdhury, Daniel Chen, and Shadman Sakib.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Inspriation / Problem We Are Solving
+The hiring process for large companies is often a lengthy and costly process. Every year some FAANG companies recieve upward of 10M applications.
+
+## Applicant DEMO
+<img src='https://cdn.discordapp.com/attachments/1115036689040150540/1117989693313781872/applicant.gif' title='Applicant Demo' width='350' alt='Applicant Demo' />
+
+## Recruiter DEMO
+<img src='https://cdn.discordapp.com/attachments/1115036689040150540/1117989693884219582/recruiter.gif' title='Recruiter Demo' width='350' alt='Recruiter Demo' />
 
 ## npm install
 Installs all the necessary dependencies for the code to compile properly.
@@ -29,33 +38,3 @@ Applicants post their resumes which we store in our database and Recruiters can 
 
 
 ### Recruiter Interface
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
