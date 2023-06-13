@@ -6,10 +6,10 @@ Created by Jawad Chowdhury, Daniel Chen, and Shadman Sakib.
 The hiring process for large companies is often a lengthy and costly process. Every year some FAANG companies recieve upward of 10M applications.
 
 ## Applicant DEMO
-<img src='https://cdn.discordapp.com/attachments/1115036689040150540/1117989693313781872/applicant.gif' title='Applicant Demo' width='350' alt='Applicant Demo' />
+![applicant demo video](https://github.com/dchen024/Resume-Parser/blob/main/applicant.gif)
 
 ## Recruiter DEMO
-<img src='https://cdn.discordapp.com/attachments/1115036689040150540/1117989693884219582/recruiter.gif' title='Recruiter Demo' width='350' alt='Recruiter Demo' />
+![recruiter demo video](https://github.com/dchen024/Resume-Parser/blob/main/recruiter.gif)
 
 ## npm install
 Installs all the necessary dependencies for the code to compile properly.
