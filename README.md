@@ -1,5 +1,5 @@
 # Resume Parser
-Projected Asigned by **HeadStarter** and **Mofizur Rahman**, Developer Relations Engineer at **Google**.  
+Projected Assigned by **HeadStarter** and **Mofizur Rahman**, Developer Relations Engineer at **Google**.  
 Created by Jawad Chowdhury, Daniel Chen, and Shadman Sakib.
 
 
