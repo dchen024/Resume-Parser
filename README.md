@@ -43,12 +43,12 @@ Installs all the necessary dependencies for the code to compile properly.
 2) Create a `.env` file in the root directory <br>
 Used to connect Resume Parser to your Firebase Storage
 ```
-REACT_APP_API_KEY = "Your API key in quotes"
-REACT_APP_AUTH_DOMAIN = "Your domain in quotes"
-REACT_APP_PROJECT_ID = "Your Project ID in quotes"
-REACT_APP_STORAGE_BUCKET = "Your storage bucket in quotes"
-REACT_APP_MESSAGING_SENDER_ID = "Your Message Sender ID in quotes"
-REACT_APP_APP_ID = "Your App ID in quotes"
+REACT_APP_API_KEY=Your API key
+REACT_APP_AUTH_DOMAIN=Your domain
+REACT_APP_PROJECT_ID=Your Project ID
+REACT_APP_STORAGE_BUCKET=Your storage bucket
+REACT_APP_MESSAGING_SENDER_ID=Your Message Sender ID
+REACT_APP_APP_ID=Your App ID
 ```
 3) Run `npm start` in the project's terminal
 Opens Resume Parser app in your browser <br>
