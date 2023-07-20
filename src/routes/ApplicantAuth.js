@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {app} from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 import {isEmail} from 'validator';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ApplicantAuth.css';
+import './Authentication.css';
 
 function ApplicantAuth(){
     const [password, setPassword] = useState('');
@@ -97,30 +95,6 @@ function ApplicantAuth(){
         }
     }
 
-    const handleGoogleAuth = async (response) => {
-        try {
-          const { tokenId } = response;
-        
-          const provider = new GoogleAuthProvider();
-
-          provider.setCustomParameters({
-            id_token: tokenId
-          });
-        
-          const auth = getAuth(app);
-          const result = await signInWithPopup(auth, provider);
-
-          const { user, credential } = result;
-        
-          console.log('Authenticated user:', user);
-          console.log('Google credential:', credential);
-        
-          navigate('/applicant');
-        } catch (error) {
-          console.error('Error authenticating with Firebase:', error);
-        }
-    }; 
-    
     const validateInputs = () => {
         const errors = {};
       
@@ -147,7 +121,6 @@ function ApplicantAuth(){
     return(
         <div className="background">
         <div className="container">
-            <h2 style={{ color: 'white', fontSize: '36px', fontWeight: 'bold', fontFamily:'Helvetica' ,}}> Welcome to WeatherWatch! </h2>
             <div className={`Authenticate ${hasErrors ? 'error' : ''} border border-primary rounded p-3`} style={{ '--height-increase': `${heightIncrease}px` }}>
                 <h2 className="d-flex justify-content-center">Login as Applicant</h2>
                 <div className = "signUp-section d-flex justify-content-center">
@@ -207,27 +180,6 @@ function ApplicantAuth(){
                 Remember me
                 </label>
                 <Link to="/forgotPassword" className="forgot-link" style={{marginLeft: '80px', textDecoration: 'none'}}>Forgot Password?</Link>
-                </div>
-
-                <div className="line-section">
-                <hr className="horizontal-line" />
-                <span className="or-text">OR</span>
-                <hr className="horizontal-line" />
-                </div>
-
-                
-                <div className="google-sign-in d-flex justify-content-center">
-                <button
-                    className="google-button"
-                    type="button"
-                    onClick={handleGoogleAuth}
-                    style={{ width: '300px' }}
-                >
-                    <span className="google-icon">
-                    <i className="google-icon"></i>
-                    </span>
-                    <span className="google-text1">Sign in with Google</span>
-                </button>
                 </div>
 
             </div>

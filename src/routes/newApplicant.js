@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './newApplicant.css'
+import './newUser.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {app} from '../firebase';
-import { getAuth, signInWithPopup, GoogleAuthProvider, fetchSignInMethodsForEmail} from 'firebase/auth';
+import { getAuth, fetchSignInMethodsForEmail} from 'firebase/auth';
 import {isEmail} from 'validator';
 
 function NewApplicant() {
@@ -105,30 +104,6 @@ function NewApplicant() {
         }
     };
 
-    const handleGoogleAuth = async (response) => {
-        try {
-          const { tokenId } = response;
-        
-          const provider = new GoogleAuthProvider();
-
-          provider.setCustomParameters({
-            id_token: tokenId
-          });
-        
-          const auth = getAuth(app);
-          const result = await signInWithPopup(auth, provider);
-
-          const { user, credential } = result;
-        
-          console.log('Authenticated user:', user);
-          console.log('Google credential:', credential);
-        
-          navigate('/applicant');
-        } catch (error) {
-          console.error('Error authenticating with Firebase:', error);
-        }
-    };      
-
     const errorCount = Object.keys(validationErrors).length;
     const heightIncrease = (errorCount + hasErrors) * 20;
 
@@ -192,20 +167,7 @@ function NewApplicant() {
                 </button>
                 <span/>
             </div>
-            
-            <div className="line-section">
-                <hr className="horizontal-line" />
-                <span className="or-text">OR</span>
-                <hr className="horizontal-line" />
-            </div>
-            
-            <div className="google-sign-in d-flex justify-content-center">
-                <button className="google-button" type="button" onClick={handleGoogleAuth}style={{ width: '300px' }}>
-                    <span className="google-icon"><i className="google-icon"></i></span>
-                    <span className="google-text">Continue with Google</span>
-                </button>
-            </div>
-
+        
             </div>
         </div>
         </div>
