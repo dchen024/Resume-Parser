@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "concurrently": "^8.2.0",
     "express": "^4.18.2",
     "firebase": "^9.22.2",
     "pdfjs-dist": "^3.7.107",
@@ -18,10 +19,13 @@
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.3",
+    "validator": "^13.9.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run start:Resume-Parser\" \"npm run start:server\"",
+    "start:Resume-Parser": "react-scripts start",
+    "start:server": "cd server && PORT=8000 node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

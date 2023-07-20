@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { storage } from "../firebase"; // Import the Firebase storage module
 import { ref, uploadBytes } from "firebase/storage"; // Import the Firebase storage functions
 import { Link } from "react-router-dom"; // Import the React Router Link component
-import { AiFillHome, AiFillBackward } from "react-icons/ai"; // Import the home icon from React Icons
+import { AiFillHome} from "react-icons/ai"; // Import the home icon from React Icons
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry"; // Import the PDF.js worker
 import * as pdfjsLib from "pdfjs-dist/build/pdf"; // Import the PDF.js library
 import { ToastContainer, toast } from "react-toastify";

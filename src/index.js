@@ -11,6 +11,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ApplicantAuth from './routes/ApplicantAuth';
+import NewApplicant from './routes/newApplicant';
+import ForgotPassword from './routes/forgotPassword';
+import RecruiterAuth from './routes/RecruiterAuth';
+import NewRecruiter from './routes/newRecruiter';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +29,26 @@ const router = createBrowserRouter([
   {
     path: "/recruiter",
     element: <Recruiter />
+  },
+  {
+    path:"/newRecruiter",
+    element:<NewRecruiter />
+  },
+  {
+    path:"/recruiterAuth",
+    element: <RecruiterAuth />
+  },
+  {
+    path:"/newApplicant",
+    element: <NewApplicant />
+  },
+  {
+    path:"/applicantAuth",
+    element:<ApplicantAuth />
+  },
+  {
+    path:"/forgotPassword",
+    element:<ForgotPassword />
   }
 ]);
 

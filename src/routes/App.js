@@ -7,18 +7,19 @@ function App() {
     <div className="container">
       <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
       
-      <h1 className="display-1 mb-5">
+      <h1 className="display-1 mb-5 d-flex justify-content-center">
         Resume Parser
       </h1>
-
+      
       <div className="d-flex justify-content-between gap-5">
-          <Link className="btn btn-primary btn-lg" to="/applicant" role="button">
+          <Link className="btn btn-primary btn-lg" to="/applicantAuth" role="button" >
             <img width="64" src={customApplicantIcon} alt="Applicant" /> Applicant
           </Link>
-          <Link className="btn btn-danger btn-lg" to="/recruiter" role="button">
+          <Link className="btn btn-danger btn-lg" to="/recruiterAuth" role="button">
             <img width="64" src={customRecruiterIcon} alt="Recruiter" /> Recruiter
           </Link>
       </div>
+
     </div>
   );
 }
